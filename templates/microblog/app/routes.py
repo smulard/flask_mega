@@ -13,19 +13,21 @@ In this example there are two decorators, which associate the URLs '/' and '/ind
 This means that when a web browser requests either of these two URLS, Flask is going to invoke this function
 and pass the return value of it back to the browser as a response.
 '''
-
+from flask import render_template #invokes Jinja2 template
 from app import app
 
 @app.route('/')
 @app.route('/index')
 def index():
     user = {'username': 'Miguel'} #mock user
-    return '''
-    <html>
-        <head>
-            <title>Home Page - Microblog</title>
-        </head>
-        <body>
-            <h1>Hello, ''' + user['username'] + '''!</h1>
-        </body>
-    </html>'''
+    posts = [
+        {
+            'author': {'username': 'John'},
+            'body': 'Beautiful day in Portland!'
+        },
+        {
+            'author': {'username': 'Susan'},
+            'body': 'The avengers movie was so cool!'
+        }
+    ]
+    return render_template('index.html', title='Home', user=user, posts=posts)
