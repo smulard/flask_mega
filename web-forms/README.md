@@ -5,6 +5,9 @@ The forms will allow users to submit blog posts and also for logging into the th
 
 For this web-form, the Flask-WTF extension is used, which is a thin weapper around the WTForms package that nicely integrates it with Flask.
 
+The Flask-WTF  extension uses Python classes to represent web forms. A form class simply defines the fields of the form as class variables.
+The file, app/forms.py module stores the web form classes. It defines a user login form, which asks the user to enter a username and a password.
+It also uncludes a "remember me" check box, and a submit button.
 
 ### To run the application
 The application will exist in a _package_. In Pythonm a sub-directory for that includes a `__init__.py` file is considered a package, and can be imported.
