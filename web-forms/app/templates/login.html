@@ -11,11 +11,16 @@ defined in the LoginForm class know how to render themselves as HTML.
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br> <!--field label-->
-            {{ form.username(size=32) }} <!-- where the field is needed-->
+            {{ form.username(size=32) }}<br> <!-- where the field is needed-->
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
         </p>
         <p>
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
         </p>
         <p>
             {{ form.remember_me() }} {{ form.remember_me.label }}</p>
