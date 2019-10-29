@@ -13,7 +13,7 @@ In this example there are two decorators, which associate the URLs '/' and '/ind
 This means that when a web browser requests either of these two URLS, Flask is going to invoke this function
 and pass the return value of it back to the browser as a response.
 '''
-from flask import render_template, flash, redirect #invokes Jinja2 tempslate
+from flask import render_template, flash, redirect, url_for #invokes Jinja2 tempslate
 from app import app
 from app.forms import LoginForm #import LoginForm from forms.py
 
@@ -42,5 +42,5 @@ def login():
     if form.validate_on_submit():
         flash('Login requested for user {}, remember_me={}'.format(
            form.username.data, form.remember_me.data)) #flash shows message to user, it stores the message
-        return redirect('/index')
+        return redirect(url_for('index'))
     return render_template('login.html', title = 'Sign In', form=form) #send LoginForms as a template
