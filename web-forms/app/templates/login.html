@@ -7,10 +7,11 @@ defined in the LoginForm class know how to render themselves as HTML.
 {% block content %}
     <h1>Sign In</h1>
     <form action="" method="post" novalidate>
+        <!-- generates a hidden field that includes a token that is used to protect the form against CSRF attacks -->
         {{ form.hidden_tag() }}
         <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}
+            {{ form.username.label }}<br> <!--field label-->
+            {{ form.username(size=32) }} <!-- where the field is needed-->
         </p>
         <p>
             {{ form.password.label }}<br>
