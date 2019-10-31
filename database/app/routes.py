@@ -13,19 +13,34 @@ In this example there are two decorators, which associate the URLs '/' and '/ind
 This means that when a web browser requests either of these two URLS, Flask is going to invoke this function
 and pass the return value of it back to the browser as a response.
 '''
-
+from flask import render_template, flash, redirect, url_for #invokes Jinja2 tempslate
 from app import app
+from app.forms import LoginForm #import LoginForm from forms.py
 
 @app.route('/')
 @app.route('/index')
 def index():
     user = {'username': 'Miguel'} #mock user
-    return '''
-    <html>
-        <head>
-            <title>Home Page - Microblog</title>
-        </head>
-        <body>
-            <h1>Hello, ''' + user['username'] + '''!</h1>
-        </body>
-    </html>'''
+    posts = [
+        {
+            'author': {'username': 'John'},
+            'body': 'Beautiful day in Portland!'
+        },
+        {
+            'author': {'username': 'Susan'},
+            'body': 'The avengers movie was so cool!'
+        }
+    ]
+    return render_template('index.html', title='Home', user=user, posts=posts)
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+    form = LoginForm() #instantiates LoginForms object
+    """ When browser sends the GET request for the web page with the form, validate_on_submit returns false,
+    which would skip the if statement and renders the template in the last line of the function.
+    """
+    if form.validate_on_submit():
+        flash('Login requested for user {}, remember_me={}'.format(
+           form.username.data, form.remember_me.data)) #flash shows message to user, it stores the message
+        return redirect(url_for('index'))
+    return render_template('login.html', title = 'Sign In', form=form) #send LoginForms as a template
