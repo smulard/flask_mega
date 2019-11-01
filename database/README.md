@@ -1,4 +1,5 @@
 #Database
+
 This application is using `Flask-SQLAlchemy`, which is a Flask-friendly wrapper for `SQLAlchemy`, which is an Object Relational Matcher (ORM).
 This allows for the ORM to translate high-level operations, like classes, objects and methods into tables and SQL.
 Flask-Migrate is also used, which is a Flask wrapper for Alembic, which is a data migration framework for SQLAlchemy.
@@ -16,6 +17,18 @@ these migration scripts are executes in the sequence they were created.
 Flask-Migrate exposes its commands through the `flask` command.
 The `flask db` sub-command is added by the Flask-Migrate to manage everything
 related to database migrations.
+
+Database migrations can either be created automatically or manually.
+To generate a migration automatically, Alembic compares the database schema
+as defined by the database models, against the actual database schema currently used in the database.
+It then populates the migration script with the changes necessary to make the database schema match the
+application models. The `flask db migrate` sub-command generates these automatic migrations.
+
+The `flask db migrate` command does make any changes to the database, it just
+generates the migration script. To apply changes to the database, the `flask db upgrade` applies
+the migration, and the `flask db downgrade` function removes to migration. After migration,
+_app.db_ is created, which is the SQLite database. When using MySQL and PostgreSQL, the database must
+be created in the database server before running `upgrade`.
 
 
 
