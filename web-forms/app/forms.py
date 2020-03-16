@@ -7,6 +7,9 @@ The four classes that represent the field types in the Login Form class are impo
 This is due to the Flask-WTF extension not providing customized version. For each field, an object is created as a class variable in the `LoginForm` class.
 Each field is given a description or label as a first argument. The validators argument is optional, but here it's used to attach validation behaviors to fields.
 The `DataRequired` validators simply checks that the field is not submitted empty. There are many more types of validators available.
+
+This module stores the web form classes. A form class defines the fields of the form as class variables.
+
 '''
 class LoginForm(FlaskForm):
     #validator checks if the data attribute on the field is the 'true' value. A string with only whitespace is false
