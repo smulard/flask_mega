@@ -1,4 +1,4 @@
-#Database
+# Database
 
 This application is using `Flask-SQLAlchemy`, which is a Flask-friendly wrapper for `SQLAlchemy`, which is an Object Relational Matcher (ORM).
 This allows for the ORM to translate high-level operations, like classes, objects and methods into tables and SQL.
