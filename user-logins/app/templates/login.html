@@ -1,0 +1,30 @@
+<!-- Adding the form in forms.py to an html template so that it can be rendered on a web page. The fields that are
+defined in the LoginForm class know how to render themselves as HTML.
+-->
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Sign In</h1>
+    <form action="" method="post" novalidate>
+        <!-- generates a hidden field that includes a token that is used to protect the form against CSRF attacks -->
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br> <!--field label-->
+            {{ form.username(size=32) }}<br> <!-- where the field is needed-->
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>{{ form.submit }}</p>
+    </form>
+{% endblock %}
